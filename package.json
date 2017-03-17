@@ -10,7 +10,6 @@
   },
   "author": "xuliuzhu",
   "license": "ISC",
-
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-eslint": "^7.1.1",
@@ -41,6 +40,7 @@
   "dependencies": {
     "antd": "^2.6.1",
     "babel-polyfill": "^6.13.0",
+    "daemon": "^1.1.0",
     "object-assign": "^4.1.0",
     "react": "^15.4.1",
     "react-dom": "^15.2.1",
