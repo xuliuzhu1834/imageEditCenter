@@ -16,8 +16,9 @@
     position: fixed;
     overflow: auto;
     height: 100%;
-    background-color: #404040;
+    /*background-color: #404040;*/
     transition: all 0.3s ease ;
+    border-right: 1px solid #e9e9e9;
 }
 
 .antLayoutSider > .ant-menu {
@@ -57,23 +58,26 @@
 .antLayouttop{
     padding: 8px 0;
     display: flex;
-    background-color: #404044;
+    /*background-color: #404044;*/
 }
 a.linkcolor{
-    color: #fff;
+    /*color: #fff;*/
 }
 .expandBtn{
     margin-right: 10px;
     border: none;
-    color:rgba(255,255,255,1);
+    /*color:rgba(255,255,255,1);*/
 }
 
 .menu2 {
     padding-left: 22px !important;
 }
-.Level1, .menu2 > a, .LevelIcon  {
-    font-size:14px;
+.menu {
+    border-right: none;
 }
+/*.Level1, .menu2 > a, .LevelIcon  {*/
+    /*font-size:14px;*/
+/*}*/
 
 
 
@@ -81,7 +85,7 @@ a.linkcolor{
 .contanier {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
-    color: #3c3c3c;
+    /*color: #3c3c3c;*/
 }
 .demo{
     display: flex;

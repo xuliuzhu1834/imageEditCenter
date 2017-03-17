@@ -1,5 +1,3 @@
-# my-react-start-kit
-react脚手架
 
 - 打包工具： wepack 支持hot
 

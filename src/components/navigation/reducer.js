@@ -6,10 +6,47 @@ import assign from 'object-assign';
 
 const menus = [
   {
-    name: '商品管理',
+    name: '导航列表',
     key: 'goods',
     icon: 'bars',
-    children: [],
+    children: [
+      {
+        link: '/cates',
+        name: '分类列表',
+        crubName: '分类',
+        nav: true,
+      },
+      {
+        link: '/cates/add',
+        name: '新增分类',
+        crubName: '新增分类',
+        nav: false,
+      },
+      {
+        link: '/cates/edit',
+        name: '编辑分类',
+        crubName: '编辑分类',
+        nav: false,
+      },
+      {
+        link: '/attribute',
+        name: '属性列表',
+        crubName: '属性',
+        nav: true,
+      },
+      {
+        link: '/attribute/add',
+        name: '新增属性',
+        crubName: '新增属性',
+        nav: false,
+      },
+      {
+        link: '/attribute/edit',
+        name: '编辑属性',
+        crubName: '编辑属性',
+        nav: false,
+      },
+    ],
   },
 ];
 
@@ -20,7 +57,7 @@ const defaultState = {
   load: false,
   menus,
   linkList,
-  expandable: 'close',
+  expandable: 'expand',
 };
 
 export default (state = defaultState, action) => {

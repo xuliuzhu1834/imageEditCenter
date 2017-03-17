@@ -8,7 +8,7 @@ class Welcome extends Component {
   render() {
     return (
       <div className={styles.demo} style={{ height: window.innerHeight - 74 }}>
-        <p><span>你</span><span>好</span><span>啊</span></p>
+        <p><span>管</span><span>理</span><span>后</span><span>台</span></p>
       </div>
     );
   }

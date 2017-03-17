@@ -36,7 +36,7 @@ export default {
           }
           callback(null, routeFactory(route, viewReq(path)));
         } catch (e) {
-          hashHistory.push('error/404');
+          console.log(e);
         }
       },
       component: Nav,

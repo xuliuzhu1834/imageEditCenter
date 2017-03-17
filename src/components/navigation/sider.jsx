@@ -18,7 +18,7 @@ const Sider = ({
     <Menu
       selectedKeys={[current]}
       defaultOpenKeys={defaultOpenKeys}
-      mode="inline" theme="dark"
+      mode="inline"
       className={styles.menu}
     >{
       menus.map(({ name, key, icon, children }) => (

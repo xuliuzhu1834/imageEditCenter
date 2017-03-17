@@ -42,9 +42,7 @@ export default (url, args = {}) => (
   }, args)))
   .then((res) => {
     const { status } = res;
-    if (status === 404) return hashHistory.push('/error/404');
-    else if (status === 500) return hashHistory.push('/error/500');
-    else if (status > 300) {
+    if (status > 300) {
       showMessage('服务器响应出错,请尝试 刷新 重试,或者联系开发人员需求帮助  _(:3 」∠)_');
       throw new Error(status);
     }
