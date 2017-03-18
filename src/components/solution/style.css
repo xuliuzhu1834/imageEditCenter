@@ -1,0 +1,30 @@
+.close{
+    position: relative;
+    left: 100px;
+    top: 25px;
+}
+.dispalyStyle{
+    display: inline-block;
+    margin-bottom: 25px;
+}
+.fullWidth{
+    width: 100%;
+}
+.upload{
+    text-align: center;
+    border: 1px dashed #d9d9d9;
+    width: 160px;
+    height: 160px;
+    border-radius: 4px;
+    background-color: #fbfbfb;
+    cursor: pointer;
+    -webkit-transition: border-color .3s ease;
+    transition: border-color .3s ease;
+    display: inline-flex;
+    justify-content: center;
+    flex-direction: column;
+    vertical-align: top;
+    font-size: 12px;
+    color: #666;
+    margin: 25px;
+}

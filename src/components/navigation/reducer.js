@@ -17,6 +17,12 @@ const menus = [
         nav: true,
       },
       {
+        link: '/solution',
+        name: '自定义',
+        crubName: '自定义',
+        nav: true,
+      },
+      {
         link: '/cates/add',
         name: '新增分类',
         crubName: '新增分类',

@@ -5,7 +5,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
 
 const config = require('./webpack.config');
-require('daemon')();
+// require('daemon')();
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 config.entry.app.unshift('webpack-dev-server/client?http://localhost:8080',
   'webpack/hot/dev-server');
