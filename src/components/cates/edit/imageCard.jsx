@@ -2,8 +2,7 @@
  * Created by brook on 2017/1/12.
  */
 import React, { PropTypes } from 'react';
-import { Card, Button } from 'antd';
-import { changeName } from './action';
+import { Card } from 'antd';
 
 const styles = {
   imgConfig: {
@@ -41,12 +40,8 @@ const ImageCard = (props) => {
         />
       </div>
       <div style={styles.textStyle}>
+        <b>描述：</b>
         <span>{props.imgName}</span>
-        <Button
-          style={{ float: 'right' }}
-          type={'ghost'} size={'small'}
-          onClick={() => props.dispatch(changeName(props.data, props.index))}
-        >{props.imgName ? '编辑' : '添加'}</Button>
       </div>
     </Card>
   );
@@ -56,8 +51,5 @@ ImageCard.propTypes = {
   imgName: PropTypes.string,
   title: PropTypes.string,
   imgUrl: PropTypes.string.isRequired,
-  data: PropTypes.shape(),
-  index: PropTypes.number,
-  dispatch: PropTypes.func,
 };
 export default ImageCard;

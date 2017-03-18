@@ -1,33 +1,39 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Select, Row, Col, message, Popconfirm, Button} from 'antd';
-import { initData } from './action';
+import { Select, Row, Col, message, Popconfirm, Button, Spin } from 'antd';
+import { commit, getCates, getAttrs, getImg, delImg, delImgFuck, submit } from './action';
 
 import SpaceComponent from '../publicComponent/spaceComponent';
 import Star from '../publicComponent/star';
 import ImageCard from './imageCard';
 import Upload from './upload';
+import Modal from './modal';
 import styles from './style.css';
 
 const Option = Select.Option;
-const url = 'http://t1.mmonly.cc/uploads/allimg/150415/22691-m7SNjW.jpg';
 class Solution extends Component {
   constructor(props) {
     super(props);
-    props.dispatch(initData());
+    props.dispatch(getCates());
+    props.dispatch(getAttrs());
   }
   render() {
+    const { cates, attrs, dispatch, imgs, imgLoad, category_id, attribute_id } = this.props;
     return (
-      <div>
+      <Spin spinning={imgLoad} >
         <SpaceComponent
           data-component1={<Star text="分类 ：" />}
           data-component2={
             <Select
               className={styles.fullWidth}
               placeholder={'请选择...'}
+              onChange={value => dispatch(commit('category_id', parseInt(value, 10)))}
             >
-              <Option key="1">1</Option>
-              <Option key="2">2</Option>
+              {
+                cates.map(v => (
+                  <Option key={`${v.id}`}> {v.name} </Option>
+                ))
+              }
             </Select>
           }
         />
@@ -37,48 +43,90 @@ class Solution extends Component {
             <Select
               className={styles.fullWidth}
               placeholder={'请选择...'}
+              onChange={(value) => {
+                dispatch(commit('attribute_id', parseInt(value, 10)));
+                return dispatch(getImg(value));
+              }}
             >
-              <Option key="1">one</Option>
-              <Option key="2">two</Option>
-              <Option key="3">three</Option>
-              <Option key="4">four</Option>
+              {
+                attrs.map(v => (
+                  <Option key={`${v.id}`}> {v.name} </Option>
+                ))
+              }
             </Select>
           }
         />
         <Row>
           <Col style={{ marginTop: '25px' }}>
             {
-              new Array(10).fill(0).map((_, i) => (
-                <div className={styles.dispalyStyle} key={i} >
-                  <Popconfirm
-                    title="确定要删除这张图片吗"
-                    onConfirm={() => message.success('yes')}
-                    onCancel={() => message.warning('no')}
-                    okText="确定" cancelText="取消"
-                  >
-                    <Button
-                      shape="circle" icon="close"
-                      className={styles.close}
+              imgs.map((v, i) => (
+                v.show ?
+                  <div className={styles.dispalyStyle} key={i}>
+                    <Popconfirm
+                      title="确定要删除这张图片吗"
+                      onConfirm={() => (v.id ?
+                        dispatch(delImg(category_id, attribute_id, v.id, i))
+                        : dispatch(delImgFuck(i)))}
+                      okText="确定" cancelText="取消"
+                    >
+                      <Button
+                        shape="circle" icon="close"
+                        className={styles.close}
+                      />
+                    </Popconfirm>
+                    <ImageCard
+                      width={'160px'}
+                      imgUrl={v.value}
+                      data={v}
+                      index={i}
+                      imgName={v.name}
+                      {...this.props}
                     />
-                  </Popconfirm>
-
-                  <ImageCard
-                    width={'160px'}
-                    imgUrl={url}
-                    {...this.props}
-                  />
-                </div>
+                  </div>
+                  : null
               ))
             }
             <Upload {...this.props} />
           </Col>
         </Row>
-      </div>
+        <Modal {...this.props} />
+        <Button
+          type="primary" style={{ margin: '25px' }}
+          onClick={() => {
+            const addImgs = imgs.filter(v => !v.id);
+            const flag = addImgs.every(v => v.name);
+            /* eslint camelcase:0 */
+            if (!category_id) {
+              return message.warning('请选择分类');
+            }
+            if (!attribute_id) {
+              return message.warning('请选择属性');
+            }
+            if (flag) {
+              return dispatch(submit({
+                is_default: 0,
+                category_id,
+                attribute_id,
+                attribute_values: addImgs.filter(v => v.show),
+              }));
+            }
+            return message.warning('请保证每张图片都有描述');
+          }}
+        >
+          提交
+        </Button>
+      </Spin>
     );
   }
 }
 Solution.propTypes = {
   dispatch: PropTypes.func,
+  category_id: PropTypes.number,
+  attribute_id: PropTypes.number,
+  attrs: PropTypes.arrayOf(PropTypes.shape()),
+  cates: PropTypes.arrayOf(PropTypes.shape()),
+  imgs: PropTypes.arrayOf(PropTypes.shape()),
+  imgLoad: PropTypes.bool,
 };
 
 const mapStateToProps = state => state.solution;

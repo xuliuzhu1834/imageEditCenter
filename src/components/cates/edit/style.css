@@ -1,0 +1,26 @@
+.downloadList {
+    width:25%;
+    margin: 0 20px 0 0;
+    display: inline-block;
+}
+.downloadList2 {
+    width:25%;
+    margin:20px 15px 20px 0;
+}
+.download {
+    color: rgba(0,0,0,.8);
+    text-decoration: underline;
+}
+.downloadCon {
+    border: 1px solid #ccc;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #000;
+}
+.upload {
+    margin-top: 20px;
+}
+.checkbox {margin:10px 0;}
+.checkboxBg { margin:20px 0; }

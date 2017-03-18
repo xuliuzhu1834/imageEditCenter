@@ -1,44 +1,70 @@
 /**
  * Created by brook on 2017/3/17.
  */
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import { Input, Select } from 'antd';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Input, Button, message } from 'antd';
 import SpaceComponent from '../../publicComponent/spaceComponent';
-import WrapperUpload from '../../publicComponent/wrapperUpload';
+import Star from '../../publicComponent/star';
+import WrapperUpload from './upload';
+import ImageCard from './imageCard';
+import { commit, submit } from './action';
 
-const width = {
-  width: '100%'
-}
-const CatesAdd = () => (
+const CatesAdd = ({
+  load,
+  name,
+  value,
+  dispatch,
+}) => (
   <div>
     <SpaceComponent
-      data-component1={<span>名称 ：</span>}
+      data-component1={<Star text="名称 ：" />}
       data-span1={2}
       data-component2={
-        <Input />
+        <Input
+          value={name}
+          onChange={
+            e => dispatch(commit('name', e.target.value))
+          }
+        />
       }
     />
-    <SpaceComponent
-      data-component1={<span>绑定属性 ：</span>}
-      data-span1={2}
-      data-component2={
-        <Select
-          multiple placeholder={'请选择...'}
-          style={width}
-        >
-          <Select.Option value="1"> 1 </Select.Option>
-          <Select.Option value="2"> 2 </Select.Option>
-        </Select>
+    <WrapperUpload dispatch={dispatch} />
+    {
+      value ?
+        <div style={{ margin: '25px 0' }}>
+          <ImageCard
+            imgUrl={value}
+            imgName={name}
+            width="250px"
+          />
+        </div>
+        :
+        null
+    }
+    <Button
+      type="primary"
+      loading={load}
+      style={{ display: 'block', margin: '25px' }}
+      onClick={() => {
+        if (!name || !value) {
+          return message.warning('请输入名称或者上传图片');
+        }
+        return dispatch(submit({ name: name.trim(), value: value.trim() }));
       }
-    />
-    <WrapperUpload
-      exportName="图片上传"
-      url={'/admin/upload_image'}
-    />
+      }
+    >
+      提交
+    </Button>
   </div>
 );
 
+CatesAdd.propTypes = {
+  name: PropTypes.string,
+  value: PropTypes.string,
+  load: PropTypes.bool,
+  dispatch: PropTypes.func,
+};
 const mapStateToProps = state => state['cates/add'];
 
 export default connect(mapStateToProps)(CatesAdd);

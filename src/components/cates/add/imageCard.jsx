@@ -2,7 +2,7 @@
  * Created by brook on 2017/1/12.
  */
 import React, { PropTypes } from 'react';
-import { Card, Input } from 'antd';
+import { Card } from 'antd';
 
 const styles = {
   imgConfig: {
@@ -40,11 +40,8 @@ const ImageCard = (props) => {
         />
       </div>
       <div style={styles.textStyle}>
-        <Input
-          style={styles.inputBorder}
-          value={props.imgName}
-          placeholder={'请填写图片描述'}
-        />
+        <b>描述：</b>
+        <span>{props.imgName}</span>
       </div>
     </Card>
   );

@@ -7,7 +7,8 @@ import * as TYPES from './types';
 const defaultState = {
   load: false,
   name: '',
-  isUse: 0,
+  value: '',
+  origin: {},
 };
 
 const reducer = (state = defaultState, action) => {
@@ -16,12 +17,23 @@ const reducer = (state = defaultState, action) => {
       return assign({}, state, {
         [action.key]: action.value,
       });
-    case TYPES.INIT_DATA_SUCCESS:
+    case TYPES.INIT_DATA:
       return assign({}, state, {
         name: action.data.name,
-        isUse: action.data.is_use,
+        value: action.data.value,
       });
-
+    case TYPES.SUBMIT:
+      return assign({}, state, {
+        load: true,
+      });
+    case TYPES.SUBMIT_SUCCESS:
+      return assign({}, state, {
+        load: false,
+      });
+    case TYPES.SUBMIT_FAIL:
+      return assign({}, state, {
+        load: false,
+      });
     default:
       return state;
   }

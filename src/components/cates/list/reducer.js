@@ -9,8 +9,7 @@ import * as TYPES from './types';
 
 const defaultState = {
   load: false,
-  name: '',
-  isUse: 0,
+  dataSource: [],
 };
 
 const reducer = (state = defaultState, action) => {
@@ -19,12 +18,19 @@ const reducer = (state = defaultState, action) => {
       return assign({}, state, {
         [action.key]: action.value,
       });
+    case TYPES.INIT_DATA:
+      return assign({}, state, {
+        load: true,
+      });
     case TYPES.INIT_DATA_SUCCESS:
       return assign({}, state, {
-        name: action.data.name,
-        isUse: action.data.is_use,
+        dataSource: action.data.map(v => assign({}, v, { key: v.id })),
+        load: false,
       });
-
+    case TYPES.INIT_DATA_FAIL:
+      return assign({}, state, {
+        load: false,
+      });
     default:
       return state;
   }

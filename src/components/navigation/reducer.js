@@ -17,12 +17,6 @@ const menus = [
         nav: true,
       },
       {
-        link: '/solution',
-        name: '自定义',
-        crubName: '自定义',
-        nav: true,
-      },
-      {
         link: '/cates/add',
         name: '新增分类',
         crubName: '新增分类',
@@ -35,23 +29,29 @@ const menus = [
         nav: false,
       },
       {
-        link: '/attribute',
-        name: '属性列表',
-        crubName: '属性',
+        link: '/solution',
+        name: '自定义',
+        crubName: '自定义',
         nav: true,
       },
-      {
-        link: '/attribute/add',
-        name: '新增属性',
-        crubName: '新增属性',
-        nav: false,
-      },
-      {
-        link: '/attribute/edit',
-        name: '编辑属性',
-        crubName: '编辑属性',
-        nav: false,
-      },
+      // {
+      //   link: '/attribute',
+      //   name: '属性列表',
+      //   crubName: '属性',
+      //   nav: true,
+      // },
+      // {
+      //   link: '/attribute/add',
+      //   name: '新增属性',
+      //   crubName: '新增属性',
+      //   nav: false,
+      // },
+      // {
+      //   link: '/attribute/edit',
+      //   name: '编辑属性',
+      //   crubName: '编辑属性',
+      //   nav: false,
+      // },
     ],
   },
 ];
