@@ -11,8 +11,8 @@ export const getCatesSer = () => (
     })
 );
 
-export const getAttrsSer = () => (
-  fetch('/attribute/list_attribute',
+export const getAttrsSer = id => (
+  fetch(`/attribute/list_door_attribute?category_id=${id}`,
     {
       method: 'get',
     })

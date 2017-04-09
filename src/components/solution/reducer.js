@@ -35,14 +35,14 @@ const reducer = (state = defaultState, action) => {
       });
     case TYPES.GET_ATTRS_SUCCESS:
       return assign({}, state, {
-        attrs: action.data,
+        attrs: action.data.map(v => v.attribute),
+        imgLoad: false,
       });
     case TYPES.UPLOAD:
       return assign({}, state, {
         imgLoad: false,
         imgs: [...state.imgs, ...action.value.map(v => ({ value: v, show: true }))],
       });
-    case TYPES.DEL_IMG_SUCCESS:
     case TYPES.DEL_IMG_FUCK:
       return assign({}, state, {
         imgs: [
@@ -54,6 +54,7 @@ const reducer = (state = defaultState, action) => {
       });
     case TYPES.GET_IMG:
     case TYPES.DEL_IMG:
+    case TYPES.GET_ATTRS:
     case TYPES.SUBMIT:
       return assign({}, state, {
         imgLoad: true,

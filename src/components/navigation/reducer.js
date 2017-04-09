@@ -29,6 +29,12 @@ const menus = [
         nav: false,
       },
       {
+        link: '/bind',
+        name: '绑定属性',
+        crubName: '绑定属性',
+        nav: true,
+      },
+      {
         link: '/solution',
         name: '自定义',
         crubName: '自定义',

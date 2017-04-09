@@ -6,8 +6,8 @@ import { message } from 'antd';
 import wrapperFork from '../../lib/wrapperFork';
 import { getAttrsSer, getCatesSer, getImgSer, delImgSer, submitSer } from './server';
 import {
-  getAttrsSuccess, getCatesSuccess, getImgSuccess, getImgFail, delImgSuccess, delImgFail,
-  submitFail, submitSuccess,
+  getAttrsSuccess, getCatesSuccess, getImg, getImgSuccess, getImgFail, delImgFail,
+  submitFail,
 } from './action';
 import * as TYPES from './types';
 
@@ -15,8 +15,8 @@ function* getCates() {
   const data = yield getCatesSer();
   yield put(getCatesSuccess(data.info.data));
 }
-function* getAttrs() {
-  const data = yield getAttrsSer();
+function* getAttrs(action) {
+  const data = yield getAttrsSer(action.id);
   yield put(getAttrsSuccess(data.info.data));
 }
 function* getImgSaga(action) {
@@ -29,12 +29,13 @@ function* getImgSaga(action) {
 }
 function* delImgSaga(action) {
   const data = yield delImgSer(action.cateId, action.attrId, action.imgid);
+  // TODO: 图片并没有删除，并且再次点击删除会报错
   if (!data || data.code !== '0') {
     message.error('图片删除失败');
     return yield put(delImgFail());
   }
   message.success('图片删除成功');
-  return yield put(delImgSuccess());
+  return yield put({ type: TYPES.GET_IMG, id: action.attrId });
 }
 
 export function* submit(action) {
@@ -44,7 +45,7 @@ export function* submit(action) {
     return yield put(submitFail());
   }
   message.success('自定义成功');
-  return yield put(submitSuccess());
+  return yield put(getImg(action.attribute_id));
 }
 
 export default function* () {

@@ -13,7 +13,8 @@ export const initData = () => ({
   type: TYPES.INIT_DATA,
 });
 
-export const getAttrs = () => ({
+export const getAttrs = id => ({
+  id,
   type: TYPES.GET_ATTRS,
 });
 export const getAttrsSuccess = data => ({

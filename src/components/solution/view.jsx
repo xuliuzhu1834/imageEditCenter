@@ -15,7 +15,6 @@ class Solution extends Component {
   constructor(props) {
     super(props);
     props.dispatch(getCates());
-    props.dispatch(getAttrs());
   }
   render() {
     const { cates, attrs, dispatch, imgs, imgLoad, category_id, attribute_id } = this.props;
@@ -27,7 +26,11 @@ class Solution extends Component {
             <Select
               className={styles.fullWidth}
               placeholder={'请选择...'}
-              onChange={value => dispatch(commit('category_id', parseInt(value, 10)))}
+              onChange={(value) => {
+                dispatch(commit('category_id', parseInt(value, 10)));
+                return dispatch(getAttrs(parseInt(value, 10)));
+              }
+              }
             >
               {
                 cates.map(v => (
@@ -93,7 +96,8 @@ class Solution extends Component {
         <Button
           type="primary" style={{ margin: '25px' }}
           onClick={() => {
-            const addImgs = imgs.filter(v => !v.id);
+            // TODO: 提交成功 但是接口返回有误
+            const addImgs = imgs.filter(v => !v.id && v.show);
             const flag = addImgs.every(v => v.name);
             /* eslint camelcase:0 */
             if (!category_id) {
@@ -107,7 +111,7 @@ class Solution extends Component {
                 is_default: 0,
                 category_id,
                 attribute_id,
-                attribute_values: addImgs.filter(v => v.show),
+                attribute_values: addImgs,
               }));
             }
             return message.warning('请保证每张图片都有描述');
