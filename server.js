@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const config = require('./webpack.config');
 // require('daemon')();
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
-config.entry.app.unshift('webpack-dev-server/client?http://localhost:3030',
+config.entry.app.unshift('webpack-dev-server/client?http://localhost:8080',
   'webpack/hot/dev-server');
 
 const compiler = webpack(Object.assign({}, config, {
@@ -18,4 +18,4 @@ const compiler = webpack(Object.assign({}, config, {
 const server = new WebpackDevServer(compiler, {
   publicPath: '/dist/',
 });
-server.listen(3030);
+server.listen(8080);

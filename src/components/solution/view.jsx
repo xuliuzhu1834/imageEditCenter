@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { Select, Row, Col, message, Popconfirm, Button, Spin } from 'antd';
-import { commit, getCates, getAttrs, getImg, delImg, delImgFuck, submit } from './action';
+import { commit, getCates, getAttrs, getImg, delImg, delImgFuck, submit, initData } from './action';
 
 import SpaceComponent from '../publicComponent/spaceComponent';
 import Star from '../publicComponent/star';
@@ -14,6 +14,7 @@ const Option = Select.Option;
 class Solution extends Component {
   constructor(props) {
     super(props);
+    props.dispatch(initData());
     props.dispatch(getCates());
   }
   render() {

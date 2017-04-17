@@ -20,6 +20,8 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
+    case TYPES.INIT_DATA:
+      return defaultState;
     case TYPES.COMMIT:
       return assign({}, state, {
         [action.key]: action.value,
