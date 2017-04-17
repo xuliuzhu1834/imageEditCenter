@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Select, Row, Col, message, Popconfirm, Button, Spin } from 'antd';
+import { Select, Row, Col, message, Popconfirm, Button, Spin, Checkbox } from 'antd';
 import { commit, getCates, getAttrs, getImg, delImg, delImgFuck, submit, initData } from './action';
 
 import SpaceComponent from '../publicComponent/spaceComponent';
@@ -85,6 +85,9 @@ class Solution extends Component {
                       index={i}
                       imgName={v.name}
                       {...this.props}
+                    />
+                    <Checkbox
+                      className={styles.check}
                     />
                   </div>
                   : null

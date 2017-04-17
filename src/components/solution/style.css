@@ -28,3 +28,7 @@
     color: #666;
     margin: 25px;
 }
+
+.check{
+    position: absolute;
+}
